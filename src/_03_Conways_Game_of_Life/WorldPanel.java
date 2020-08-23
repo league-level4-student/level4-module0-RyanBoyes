@@ -34,7 +34,7 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 		
 		
 		//3. Initialize the cell array to the appropriate size.
-		c = new Cell[cpr][h/cpr];
+		c = new Cell[cpr][cpr];
 		
 		//3. Iterate through the array and initialize each cell.
 		//   Don't forget to consider the cell's dimensions when 
@@ -140,38 +140,56 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 		int neighborsAlive = 0;
 		
 		
-		if(x>0&&y>0&&x<WIDTH&&y<HEIGHT) {
-		
+		if(x>0&&y>0) {
 		if(c[x-1][y-1].isAlive) {
 			neighborsAlive++;
 		}
+	}
+		if(y>0) {
 		if(c[x][y-1].isAlive) {
 			neighborsAlive++;
 		}
+	}
+		if(x<49&&y>0) {
 		if(c[x+1][y-1].isAlive) {
 			neighborsAlive++;
 		}
+	}
+		if(x>0) {
 		if(c[x-1][y].isAlive) {
 			neighborsAlive++;
 		}
+	}
+		if(x<49) {
 		if(c[x+1][y].isAlive) {
 			neighborsAlive++;
 		}
+	}
+		
+		if(x>0&&y<49) {
 		if(c[x-1][y+1].isAlive) {
 			neighborsAlive++;
 		}
+		}
+		
+		if(y<49) {
 		if(c[x][y+1].isAlive) {
 			neighborsAlive++;
 		}
+	}
+		
+		if(x<49&&y<49) {
 		if(c[x+1][y+1].isAlive) {
 			neighborsAlive++;
 		}
-		
-		}		
-		
+	}
 		
 		return neighborsAlive;
-	}
+	}		
+		
+		
+		
+	
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
@@ -196,12 +214,15 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 		//    which cell is clicked. Then toggle
 		//    the isAlive variable for that cell.
 		
-		int x = e.getX();
-		int y = e.getY();
+		int x = e.getX()/cellSize;
+		int y = e.getY()/cellSize;
 		
+		if(c[x][y].isAlive == false) {
 		c[x][y].isAlive = true;
-		
-		
+		}
+		else if(c[x][y].isAlive == true) {
+			c[x][y].isAlive = false;
+		}
 		
 		repaint();
 	}

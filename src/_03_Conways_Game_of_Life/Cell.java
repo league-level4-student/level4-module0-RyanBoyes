@@ -54,13 +54,13 @@ public class Cell implements Drawable{
 	@Override
 	public void draw(Graphics g) {
 	
-		if(isAlive=true) {
+		if(isAlive==true) {
 		g.setColor(Color.GREEN);
 		g.fillRect(x, y, cellSize, cellSize);
 		}
-		else if(isAlive=false) {
+		else if(isAlive==false) {
 			g.setColor(Color.GRAY);
-			g.fillRect(getX(), getX(), cellSize, cellSize);
+			g.fillRect(x, y, cellSize, cellSize);
 		}
 		g.setColor(Color.BLACK);
 		g.drawRect(x, y, cellSize, cellSize);
